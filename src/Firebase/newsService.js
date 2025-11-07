@@ -1,3 +1,4 @@
+// src/Firebase/newsService.js
 import {
   addDoc, collection, doc, getDoc, getDocs,
   orderBy, query, serverTimestamp, updateDoc, where
@@ -17,7 +18,7 @@ export async function createNews(data) {
     authorName: data.authorName,
     state: data.state ?? "Edición",
     createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp()
+    updatedAt: serverTimestamp(),
   };
   const ref = await addDoc(col, payload);
   return ref.id;
@@ -40,6 +41,13 @@ export async function listMyNews(uid) {
 
 export async function listPublished() {
   const q = query(col, where("state", "==", "Publicado"), orderBy("updatedAt", "desc"));
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+// 🔹 NUEVA: todas las noticias (para Editor)
+export async function listAllNews() {
+  const q = query(col, orderBy("updatedAt", "desc"));
   const snap = await getDocs(q);
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }

@@ -1,16 +1,21 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { RouterProvider } from 'react-router-dom'
-import { router } from './router'
-import AuthProvider from './Components/Auth/AuthContext'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 
-createRoot(document.getElementById('root')).render(
+// OJO: si tu AuthContext exporta por defecto, este import está bien.
+// Si no, usa: import { AuthProvider } from "./Components/Auth/AuthContext";
+import AuthProvider from "./Components/Auth/AuthContext";
+
+// Toast provider/hook
+import { ToastProvider } from "./Components/Toast/Toast";
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
     </AuthProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

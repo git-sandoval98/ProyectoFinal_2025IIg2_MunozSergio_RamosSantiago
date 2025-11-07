@@ -1,0 +1,41 @@
+
+:root{
+  --bg:#0b0f14;
+  --card:#111824;
+  --muted:#7b8da0;
+  --text:#e6edf3;
+  --accent:#2ea043;
+  --accent-2:#3b82f6;
+  --danger:#ef4444;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,Helvetica,sans-serif}
+a{color:var(--accent-2);text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.nav{display:flex;align-items:center;gap:16px;padding:12px 24px;border-bottom:1px solid #1f2937;background:#0d131c;position:sticky;top:0;z-index:10}
+.nav a{font-weight:600}
+.spacer{flex:1}
+.btn{padding:10px 14px;border-radius:12px;background:#1f2937;border:1px solid #2b3a50;color:var(--text);cursor:pointer}
+.btn.primary{background:var(--accent-2);border-color:#2e62c7;color:white}
+.btn.ghost{background:transparent;border:1px solid #2b3a50}
+.grid{display:grid;gap:16px}
+.grid.cards{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid #1f2937;border-radius:16px;padding:16px}
+.card h3{margin:0 0 6px 0}
+.badge{display:inline-flex;gap:8px;align-items:center;font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #2b3a50;color:var(--muted)}
+.input, .select, .textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2b3a50;background:#0d131c;color:var(--text);outline:none}
+.form-row{display:grid;gap:12px;margin-bottom:12px}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:10px;border-bottom:1px solid #1f2937;text-align:left}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0d131c;border:1px solid #2b3a50;border-radius:6px;padding:2px 6px}
+.footer{color:var(--muted);font-size:14px;margin-top:24px}
+.small{font-size:12px;color:var(--muted)}
+
+.card{box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.btn{box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+.ql-toolbar.ql-snow{border:1px solid #2b3a50;background:#0d131c;color:var(--text);border-radius:12px 12px 0 0}
+.ql-container.ql-snow{border:1px solid #2b3a50;border-top:0;background:#0d131c;color:var(--text);border-radius:0 0 12px 12px}
+.ql-snow .ql-stroke{stroke:#e6edf3}
+.ql-snow .ql-fill{fill:#e6edf3}
+img{display:block}
