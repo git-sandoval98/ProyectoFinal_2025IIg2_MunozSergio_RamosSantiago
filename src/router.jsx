@@ -18,12 +18,14 @@ import RoleGuard from "./Components/Auth/RoleGuard";
 import { ROLES } from "./utils/constants";
 
 // 404
-import NotFound from "./Pages/NotFound/NotFound";
+import ErrorFallback from "./Components/Errors/ErrorFallback";
+import NotFound from "./Pages/Errors/NotFound";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorFallback />,
     children: [
       // Home pública
       { index: true, element: <Home /> },
@@ -60,7 +62,7 @@ export const router = createBrowserRouter([
               </RoleGuard>
             ),
           },
-          { path: "*", element: <NotFound /> },
+          // { path: "*", element: <NotFound /> },
         ],
       },
 

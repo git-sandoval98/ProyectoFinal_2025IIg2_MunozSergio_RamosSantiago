@@ -45,7 +45,7 @@ export async function listPublished() {
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
-// 🔹 NUEVA: todas las noticias (para Editor)
+//Todas las noticias (para Editor)
 export async function listAllNews() {
   const q = query(col, orderBy("updatedAt", "desc"));
   const snap = await getDocs(q);
