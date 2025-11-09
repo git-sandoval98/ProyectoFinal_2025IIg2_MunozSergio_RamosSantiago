@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile
 } from "firebase/auth";
-import { upsertUser, getUserById } from "../../Firebase/usersService";
+import { upsertUser} from "../../Firebase/usersService";
 import { ROLES } from "../../utils/constants";
 import { useToast } from "../../Components/Toast/Toast";
 import { useNavigate, useLocation } from "react-router-dom";
