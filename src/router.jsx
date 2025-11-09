@@ -9,13 +9,16 @@ import NewsDetail from "./Pages/NewsDetail/NewsDetail"; // detalle público
 import Login from "./Pages/Login/Login";
 
 // Admin
-import Dashboard from "./Pages/Dashboard/Dashboard";    // <-- YA NO Admin.jsx
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyPosts from "./Pages/MyPosts/MyPosts";
 import AllPosts from "./Pages/AllPosts/AllPosts";
 
 import ProtectedRoute from "./Components/Auth/ProtectedRoute";
 import RoleGuard from "./Components/Auth/RoleGuard";
 import { ROLES } from "./utils/constants";
+
+// 404
+import NotFound from "./Pages/NotFound/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -57,8 +60,11 @@ export const router = createBrowserRouter([
               </RoleGuard>
             ),
           },
+          { path: "*", element: <NotFound /> },
         ],
       },
+
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
