@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../Firebase/ConfigFirebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -10,20 +10,62 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (fbUser) => {
-      if (!fbUser) { setUser(null); setLoading(false); return; }
-      const snap = await getDoc(doc(db, "users", fbUser.uid));
-      setUser({
-        uid: fbUser.uid,
-        email: fbUser.email ?? "",
-        displayName: fbUser.displayName ?? "",
-        ...(snap.exists() ? snap.data() : { role: undefined })
-      });
-      setLoading(false);
-    });
-    return () => unsub();
+  const buildUser = useCallback((fbUser, extra = {}) => {
+    return {
+      uid: fbUser.uid,
+      email: fbUser.email ?? "",
+      displayName: fbUser.displayName ?? "",
+      ...extra,
+      role:
+        typeof extra.role === "string"
+          ? extra.role.toUpperCase()
+          : undefined,
+    };
   }, []);
 
-  return <AuthCtx.Provider value={{ user, loading }}>{children}</AuthCtx.Provider>;
+  const fetchUserDoc = useCallback(async (uid) => {
+    const snap = await getDoc(doc(db, "users", uid));
+    return snap.exists() ? snap.data() : {};
+  }, []);
+
+  const refreshUser = useCallback(async () => {
+    const fbUser = auth.currentUser;
+    if (!fbUser) {
+      setUser(null);
+      return;
+    }
+    try {
+      const data = await fetchUserDoc(fbUser.uid);
+      setUser(buildUser(fbUser, data));
+    } catch (e) {
+      console.error("Error refreshing user:", e);
+      setUser(buildUser(fbUser));
+    }
+  }, [buildUser, fetchUserDoc]);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (fbUser) => {
+      if (!fbUser) {
+        setUser(null);
+        setLoading(false);
+        return;
+      }
+      try {
+        const data = await fetchUserDoc(fbUser.uid);
+        setUser(buildUser(fbUser, data));
+      } catch (e) {
+        console.error("Error reading user doc:", e);
+        setUser(buildUser(fbUser));
+      } finally {
+        setLoading(false);
+      }
+    });
+    return () => unsub();
+  }, [buildUser, fetchUserDoc]);
+
+  return (
+    <AuthCtx.Provider value={{ user, loading, refreshUser }}>
+      {children}
+    </AuthCtx.Provider>
+  );
 }
