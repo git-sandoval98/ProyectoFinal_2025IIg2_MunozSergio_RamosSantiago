@@ -22,19 +22,37 @@ export default function App() {
     <>
       <header className="site-header">
         <nav className="site-nav">
-          <Link to="/">Inicio</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/admin">Dashboard</Link>
-          {user && (
-            <button className="btn-logout" onClick={doLogout}>
-              Salir
-            </button>
-          )}
+          <div className="nav-left">
+            <Link to="/">Inicio</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/admin">Dashboard</Link>
+          </div>
+
+          <div className="nav-right">
+            {user ? (
+              <>
+                <span className="user-info">
+                  Hola{" "}
+                  <strong>{user.displayName || user.email?.split("@")[0]}</strong>{" "}
+                  –{" "}
+                  <em>
+                    {user.role === "EDITOR"
+                      ? "Editor"
+                      : user.role === "REPORTERO"
+                      ? "Reportero"
+                      : "Usuario"}
+                  </em>
+                </span>
+                <button className="btn-logout" onClick={doLogout}>
+                  Salir
+                </button>
+              </>
+            ) : null}
+          </div>
         </nav>
       </header>
 
-      {/* <main style={{ padding: 16 }}> */}
-         <main className="site-main">
+      <main style={{ padding: 16 }}>
         <Outlet />
       </main>
 
