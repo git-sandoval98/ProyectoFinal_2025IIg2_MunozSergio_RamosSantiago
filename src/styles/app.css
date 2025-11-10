@@ -39,3 +39,37 @@
 .site-nav .btn-logout:focus{
   background: #1d4ed8;
 }
+
+
+
+
+
+/* Campos del formulario de Login */
+.MuiTextField-root input,
+.MuiTextField-root label {
+  color: #e5e7eb !important;       /* texto claro */
+}
+
+/* Borde del input */
+.MuiOutlinedInput-root fieldset {
+  border-color: #3b82f6 !important; /* azul tenue */
+}
+
+/* Al hacer foco */
+.MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #60a5fa !important; /* azul más vivo */
+}
+
+/* Fondo del campo */
+.MuiOutlinedInput-root input {
+  background-color: #4e596c !important; /* gris oscuro */
+}
+
+/* Texto del placeholder */
+.MuiInputLabel-root {
+  color: #94a3b8 !important; /* gris claro */
+}
+
+.MuiButtonBase-root {
+    color: #94a3b8 !important;
+}

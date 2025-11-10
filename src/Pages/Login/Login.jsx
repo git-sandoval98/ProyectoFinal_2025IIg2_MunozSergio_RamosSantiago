@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Button, Tabs, Tab, Box, Typography } from "@mui/material";
 import { auth } from "../../Firebase/ConfigFirebase";
 import {
@@ -30,6 +30,13 @@ export default function Login() {
   const { push } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    if (location.state?.reason === "auth") {
+      push("No tienes acceso a este apartado. Inicia sesión para continuar.", "error");
+      navigate(location.pathname, { replace: true, state: null });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function msg(e) {
     const code = e?.code || "";
@@ -73,17 +80,23 @@ export default function Login() {
       let u = await getUserById(cred.user.uid);
 
       if (!u) {
+    
         await upsertUser(cred.user.uid, {
           displayName: cred.user.displayName || "",
           email: cred.user.email || email,
           role: ROLES.REPORTERO,
         });
-        u = { role: ROLES.REPORTERO, displayName: cred.user.displayName || "", email: cred.user.email || email };
+        u = {
+          role: ROLES.REPORTERO,
+          displayName: cred.user.displayName || "",
+          email: cred.user.email || email,
+        };
       }
 
       const niceName = u.displayName || cred.user.displayName || u.email || email;
       push(`Bienvenido, ${niceName}`, "success");
 
+      // Si venías de una ruta protegida, vuelve allí
       const from = location.state?.from || null;
       if (from) {
         return navigate(from, { replace: true });

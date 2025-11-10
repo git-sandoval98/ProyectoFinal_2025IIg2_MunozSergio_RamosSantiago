@@ -2,13 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
-import "./styles/cms/index.css";
-import "./styles/app.css"; 
 
+import "./styles/cms/index.css";
+import "./styles/app.css";
 
 import AuthProvider from "./Components/Auth/AuthContext";
 
-// Toast provider/hook
 import { ToastProvider } from "./Components/Toast/Toast";
 
 createRoot(document.getElementById("root")).render(

@@ -33,7 +33,8 @@ export default function App() {
         </nav>
       </header>
 
-      <main style={{ padding: 16 }}>
+      {/* <main style={{ padding: 16 }}> */}
+         <main className="site-main">
         <Outlet />
       </main>
 
