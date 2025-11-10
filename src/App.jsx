@@ -51,7 +51,6 @@ export default function App() {
           </div>
         </nav>
       </header>
-
       <main style={{ padding: 16 }}>
         <Outlet />
       </main>
