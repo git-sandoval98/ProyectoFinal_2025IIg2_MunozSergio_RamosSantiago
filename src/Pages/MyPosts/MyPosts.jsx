@@ -1,4 +1,3 @@
-// src/Pages/MyPosts/MyPosts.jsx
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Components/Auth/AuthContext";
 import Page from "../../Components/Page/Page";
@@ -24,7 +23,6 @@ export default function MyPosts() {
     imagePreview: "", // solo preview local (sin Storage por ahora)
   });
 
-  // Cargar mis noticias (authorId = uid)
   async function load() {
     if (!user?.uid) return;
     const rows = await listMyNews(user.uid);
@@ -42,7 +40,6 @@ export default function MyPosts() {
     reader.readAsDataURL(file);
   }
 
-  // Crear noticia en estado "Edición"
   async function onCreate(e) {
     e.preventDefault();
     if (!form.title.trim()) return push("El título es obligatorio", "error");
@@ -55,7 +52,7 @@ export default function MyPosts() {
       authorId: user.uid,
       authorName: user.displayName || user.email,
       state: NEWS_STATE.EDICION,
-      imageUrl: "", // cuando actives Storage, aquí guardaremos la URL real
+      imageUrl: "", // cuando se active Storage, aquí guardaremos la URL real
     });
 
     setForm({ title: "", subtitle: "", categoryId: "Tecnología", content: "", imagePreview: "" });
@@ -64,7 +61,6 @@ export default function MyPosts() {
     console.log("Nueva noticia:", id);
   }
 
-  // Marcar como "Terminado" (para que el editor la publique)
   async function markDone(id) {
     await updateNews(id, { state: NEWS_STATE.TERMINADO });
     push("Marcado como Terminado", "success");

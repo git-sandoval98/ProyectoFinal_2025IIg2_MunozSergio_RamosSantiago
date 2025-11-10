@@ -3,9 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 
 // Público
-import Home from "./Pages/Home/Home";                   // portada pública
-import News from "./Pages/News/News";                   // listado público
-import NewsDetail from "./Pages/NewsDetail/NewsDetail"; // detalle público
+import Home from "./Pages/Home/Home";
+import News from "./Pages/News/News"; 
+import NewsDetail from "./Pages/NewsDetail/NewsDetail";
 import Login from "./Pages/Login/Login";
 
 // Admin

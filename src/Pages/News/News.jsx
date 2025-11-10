@@ -1,4 +1,3 @@
-// src/Pages/News/News.jsx
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,7 +9,6 @@ export default function News() {
   const [q, setQ] = useState("");
   const [sec, setSec] = useState("");
 
-  // Cargar noticias PUBLICADAS desde Firestore
   useEffect(() => {
     (async () => {
       const rows = await listPublished();
@@ -18,13 +16,11 @@ export default function News() {
     })();
   }, []);
 
-  // Secciones únicas (categoryId)
   const sections = useMemo(
     () => Array.from(new Set(all.map((n) => n.categoryId).filter(Boolean))),
     [all]
   );
 
-  // Filtro por texto y sección
   const news = useMemo(() => {
     const qLower = q.toLowerCase();
     return all.filter((n) => {

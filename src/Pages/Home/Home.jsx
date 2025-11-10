@@ -1,11 +1,10 @@
-// src/Pages/Home/Home.jsx
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
 import Page from "../../Components/Page/Page";
 import Card from "../../Components/Card/Card";
 import { listPublished } from "../../Firebase/newsService";
+import NewsSection from "../../Components/NewsSection/NewsSection";
 
 export default function Home() {
   const [all, setAll] = useState([]);
@@ -18,10 +17,7 @@ export default function Home() {
     })();
   }, []);
 
-  // Máximo 12 para portada
   const news = useMemo(() => all.slice(0, 12), [all]);
-
-  // Secciones únicas (categoryId)
   const sections = useMemo(
     () => Array.from(new Set(all.map((n) => n.categoryId).filter(Boolean))),
     [all]
@@ -71,6 +67,10 @@ export default function Home() {
           </motion.div>
         ))}
       </motion.div>
+
+      <div style={{ marginTop: 40 }}>
+        <NewsSection items={news.slice(0, 3)} />
+      </div>
 
       <h2 style={{ marginTop: 28 }}>Secciones</h2>
       <div

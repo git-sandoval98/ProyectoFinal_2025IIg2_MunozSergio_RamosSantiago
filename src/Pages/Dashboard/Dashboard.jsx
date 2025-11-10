@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/Dashboard.jsx
 import { Outlet, Link } from "react-router-dom";
 import { useAuth } from "../../Components/Auth/AuthContext";
 import Page from "../../Components/Page/Page";
@@ -23,7 +22,6 @@ export default function Dashboard() {
             <p>
               Crear, editar y marcar como <strong>Terminado</strong>.
             </p>
-            {/* Puedes usar relativa "mis-noticias" o absoluta "/admin/mis-noticias" */}
             <Link to="mis-noticias" className="btn">
               Abrir
             </Link>
@@ -42,8 +40,6 @@ export default function Dashboard() {
           </Card>
         )}
       </div>
-
-      {/* Aquí se renderizan las subrutas /admin/mis-noticias y /admin/todas */}
       <div style={{ marginTop: 24 }}>
         <Outlet />
       </div>

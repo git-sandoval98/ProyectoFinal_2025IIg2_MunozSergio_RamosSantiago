@@ -1,0 +1,44 @@
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, Arial, Helvetica, sans-serif;
+    line-height: 1.5
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 24px 0
+}
+
+.small {
+    font-size: 12px;
+    color: var(--muted)
+}
+
+.muted {
+    color: var(--muted)
+}
+
+.code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 6px
+}
